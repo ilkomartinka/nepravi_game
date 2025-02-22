@@ -1,0 +1,9 @@
+koupelna obyvak
+detska obyvak
+obyvak koupelna detska chodba
+chodba kuchyn loznice obyvak
+kuchyn chodba
+loznice knihovna tajna chodba
+knihovna loznice sklep
+sklep knihovna
+tajna loznice
