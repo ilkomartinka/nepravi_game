@@ -1,35 +1,38 @@
-import java.io.IOException;
+import command.Command;
+import command.Pohyb;
+import command.PrintMapa;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Console {
     private Scanner sc = new Scanner(System.in);
     private HashMap<String, Command> prikazy = new HashMap<>();
-
-
     private boolean exit = false;
 
-
     public void inicialization() {
-        prikazy.put("pohyb", new Pohyb("detska"));
+        prikazy.put("pohyb", new Pohyb());
+        prikazy.put("mapa", new PrintMapa());
     }
 
-    public void doIt() throws IOException {
-        Svet svet = new Svet();
-        System.out.println(svet);
-        System.out.println("> ");
-        String odpoved = sc.nextLine();
+    public void doIt() {
+        getPrikazy();
+        System.out.print("\n> ");
+        String odpoved = sc.next();
         if (prikazy.containsKey(odpoved)) {
-            System.out.println("> " + prikazy.get(odpoved).execute());
+            System.out.println(prikazy.get(odpoved).execute());
+        } else {
+            System.out.println("Prikaz nenajden: " + odpoved);
         }
     }
 
-    public void start() throws IOException {
+    public void start() {
         inicialization();
-        do{
+        do {
             doIt();
-        }while(!exit);
-
+        } while (!exit);
     }
 
+    private void getPrikazy() {
+        System.out.print("Prikazy: " + prikazy.keySet());
+    }
 }
