@@ -4,12 +4,13 @@ import command.PrintMapa;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Console {
+public class Hra {
     private Scanner sc = new Scanner(System.in);
     private HashMap<String, Command> prikazy = new HashMap<>();
     private boolean exit = false;
+    private Hrac hrac = new Hrac();
 
-    public void inicialization() {
+    public void initialization() {
         prikazy.put("pohyb", new Pohyb());
         prikazy.put("mapa", new PrintMapa());
     }
@@ -26,7 +27,7 @@ public class Console {
     }
 
     public void start() {
-        inicialization();
+        initialization();
         do {
             doIt();
         } while (!exit);

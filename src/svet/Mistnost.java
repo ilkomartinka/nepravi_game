@@ -1,26 +1,35 @@
 package svet;
+import predmety.Predmet;
+
+import java.util.ArrayList;
 import java.util.Objects;
 public class Mistnost {
-    private String name;
+    private String nazev;
+    private Predmet predmet;
+    private ArrayList<Postava> postavy;
 
     public Mistnost(String name) {
-        this.name = name;
+        this.nazev = name;
     }
 
     @Override
     public String toString() {
-        return name;
+        return nazev;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Mistnost mistnost = (Mistnost) o;
-        return Objects.equals(name, mistnost.name);
+        return Objects.equals(nazev, mistnost.nazev);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(name);
+        return Objects.hashCode(nazev);
+    }
+
+    public ArrayList<Postava> getPostavy() {
+        return postavy;
     }
 }
