@@ -1,6 +1,8 @@
-import command.Command;
-import command.Pohyb;
-import command.PrintMapa;
+package hra;
+
+import command.*;
+import svet.Mistnost;
+
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -13,6 +15,8 @@ public class Hra {
     public void initialization() {
         prikazy.put("pohyb", new Pohyb());
         prikazy.put("mapa", new PrintMapa());
+        prikazy.put("vezmi",new Vezmi());
+        prikazy.put("prozkoumej",new Prozkoumej(hrac));
     }
 
     public void doIt() {

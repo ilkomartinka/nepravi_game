@@ -1,10 +1,15 @@
 package predmety;
 
 public abstract class Predmet {
-    protected String name;
+    protected String nazev;
+
     protected abstract String pouziti();
 
-    public Predmet() {
+    public Predmet(String nazev) {
+        this.nazev = nazev;
+    }
 
+    public String getNazev() {
+        return nazev;
     }
 }

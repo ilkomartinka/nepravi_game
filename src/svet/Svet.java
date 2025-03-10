@@ -1,4 +1,7 @@
 package svet;
+
+import predmety.Baterka;
+import predmety.Klic;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,10 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Svet {
-   public static HashMap<Mistnost, ArrayList<Mistnost>> svet = new HashMap<>();
+    public static HashMap<Mistnost, ArrayList<Mistnost>> svet = new HashMap<>();
 
-    public Svet(){
+    public Svet() {
         nacteniMapy();
+        pridatPredmety();
     }
 
     private void nacteniMapy() {
@@ -23,9 +27,9 @@ public class Svet {
                 for (int i = 1; i < mistnosti.length; i++) {
                     mistnostiVedle.add(new Mistnost(mistnosti[i]));
                 }
-                svet.put(mistnost,mistnostiVedle);
+                svet.put(mistnost, mistnostiVedle);
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -38,9 +42,23 @@ public class Svet {
         return svet.get(mistnost);
     }
 
-    public void printMap(){
-        for(Map.Entry<Mistnost,ArrayList<Mistnost>> entry : svet.entrySet()){
+    public void printMap() {
+        for (Map.Entry<Mistnost, ArrayList<Mistnost>> entry : svet.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
+    }
+
+    private void pridatPredmety() {
+        for (Mistnost mistnost : svet.keySet()) {
+            switch (mistnost.getNazev().toLowerCase()) {
+                case "detska":
+                    mistnost.nastavPredmet(new Baterka());
+                    break;
+                case "kuchyn":
+                    mistnost.nastavPredmet(new Klic());
+                    break;
+            }
+        }
+
     }
 }
