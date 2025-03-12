@@ -10,7 +10,8 @@ public class Klic extends Predmet {
     }
 
     @Override
-    protected String pouziti() {
-        return "";
+    public String pouziti() {
+        //dopsat podminky
+        return "Použil jsi klíč a otevřel sklep. Nyní můžeš vstoupit do sklepa.";
     }
 }

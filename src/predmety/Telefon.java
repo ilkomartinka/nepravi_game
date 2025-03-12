@@ -1,14 +1,20 @@
 package predmety;
 
-public class Telefon extends Predmet{
-    private boolean finguje;
+import hra.Hrac;
 
-    public Telefon(String nazev) {
+public class Telefon extends Predmet{
+    private boolean finguje = false;
+
+    public Telefon() {
         super("telefon");
     }
 
     @Override
-    protected String pouziti() {
-        return "";
+    public String pouziti() {
+        if(finguje){
+            return "Volame pomoc!!!Buď však opatrný, prarodiče si mohou všimnout, že telefonuješ.";
+        }else{
+            return "Nejdriv ho musis opravit";
+        }
     }
 }

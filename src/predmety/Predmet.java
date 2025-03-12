@@ -1,9 +1,11 @@
 package predmety;
 
+import hra.Hrac;
+
 public abstract class Predmet {
     protected String nazev;
 
-    protected abstract String pouziti();
+    public abstract String pouziti();
 
     public Predmet(String nazev) {
         this.nazev = nazev;

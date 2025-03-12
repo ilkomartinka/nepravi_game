@@ -1,12 +1,12 @@
 package predmety;
 
 public class SIMkarta extends Predmet {
-    public SIMkarta(String nazev) {
-        super("simkarta");
+    public SIMkarta() {
+        super("SIMkarta");
     }
 
     @Override
-    protected String pouziti() {
-        return "";
+    public String pouziti() {
+        return "Vložil jsi SIM kartu do mobilu, teď je čas ho využít. Buď však opatrný, prarodiče si mohou všimnout, že telefonuješ.";
     }
 }
