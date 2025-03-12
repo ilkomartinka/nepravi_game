@@ -11,15 +11,17 @@ public class Hrac {
 
     public Hrac() {
         this.inventar = new ArrayList<>();
-        this.aktualniMistnost = new Mistnost("detska");
+
     }
 
-    public String pridatPredmet(Predmet p) {
-        if(!inventar.contains(p)){
-            inventar.add(p);
-            return "Předmět přidan do inventaře";
+    public String doplneniInventare(Predmet p) {
+        for (Predmet predmet : inventar) {
+            if (predmet.getNazev().equals(p.getNazev())) {
+                return "Tenhle predmet uz mas";
+            }
         }
-        return "Tenhle predmet uz mas";
+        inventar.add(p);
+        return "Předmět přidan do inventaře";
     }
     public Predmet odebratPredmet(String nazev) {
         for(Predmet p : inventar){
@@ -31,6 +33,7 @@ public class Hrac {
         return null;
     }
 
+
     public Mistnost getAktualniMistnost() {
         return aktualniMistnost;
     }
@@ -39,19 +42,25 @@ public class Hrac {
         this.aktualniMistnost = aktualniMistnost;
     }
 
-    public ArrayList<Predmet> getInventar() {
+    public String getInventar() {
         if(inventar.isEmpty()){
             System.out.println("Tvůj inventář je prázdný.");
         }else{
-            System.out.println("Inventář: ");
+            System.out.print("Inventář: ");
             for(Predmet p : inventar){
-                System.out.println(" - " + p.getNazev());
+               return "- " + p.getNazev();
             }
         }
-        return inventar;
+        return "Nastala chyba";
     }
-    private boolean obsahujePredmet(Predmet p) {
-        return inventar.contains(p);
+
+    public boolean maPredmet(String p) {
+        for (Predmet predmet : inventar) {
+            if(predmet.getNazev().equals(p)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -1,20 +1,13 @@
 package svet;
 import predmety.Predmet;
-
 import java.util.Objects;
 public class Mistnost {
     private String nazev;
     private Predmet predmet;
-    //private ArrayList<Postava> postavy;
 
     public Mistnost(String name) {
         this.nazev = name;
     }
-
-    public String getNazev() {
-        return nazev;
-    }
-
     @Override
     public String toString() {
         return nazev;
@@ -32,11 +25,9 @@ public class Mistnost {
         return Objects.hashCode(nazev);
     }
 
-    /*public ArrayList<Postava> getPostavy() {
-        return postavy;
-    }*/
-    public void nastavPredmet(Predmet p){
-        this.predmet = p;
+    public Predmet nastavPredmet(Predmet predmet){
+        this.predmet = predmet;
+        return predmet;
     }
 
     public Predmet odebratPredmet()    {
@@ -54,6 +45,9 @@ public class Mistnost {
 
     public Predmet getPredmet() {
         return predmet;
+    }
+    public String getNazev() {
+        return nazev;
     }
 
 }

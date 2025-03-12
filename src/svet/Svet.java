@@ -1,7 +1,7 @@
 package svet;
 
-import predmety.Baterka;
-import predmety.Klic;
+import predmety.*;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Svet {
-    public static HashMap<Mistnost, ArrayList<Mistnost>> svet = new HashMap<>();
+    public HashMap<Mistnost, ArrayList<Mistnost>> svet = new HashMap();
 
     public Svet() {
         nacteniMapy();
-        pridatPredmety();
+        pridaniPredmetu();
     }
 
     private void nacteniMapy() {
@@ -29,14 +29,11 @@ public class Svet {
                 }
                 svet.put(mistnost, mistnostiVedle);
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    /*public HashMap<Mistnost, ArrayList<Mistnost>> getSvet() {
-        return svet;
-    }*/
 
     public ArrayList<Mistnost> moznostPohybu(Mistnost mistnost) {
         return svet.get(mistnost);
@@ -47,18 +44,28 @@ public class Svet {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
     }
-
-    private void pridatPredmety() {
+    public Mistnost getMistnost(String nazev) {
         for (Mistnost mistnost : svet.keySet()) {
-            switch (mistnost.getNazev().toLowerCase()) {
-                case "detska":
-                    mistnost.nastavPredmet(new Baterka());
-                    break;
-                case "kuchyn":
-                    mistnost.nastavPredmet(new Klic());
-                    break;
+            if (mistnost.getNazev().equals(nazev)) {
+                return mistnost;
             }
         }
-
+        return null;
     }
-}
+
+//PRIDAVA SE JENOM BATERKA, POMOC
+    public void pridaniPredmetu() {
+       getMistnost("kuchyn").nastavPredmet(new Klic());
+        //System.out.println("Předmět byl přidán do kuchyně");
+
+        getMistnost("detska").nastavPredmet(new Baterka());
+        //System.out.println("Předmět byl přidán do dětského pokoje");
+
+        getMistnost("loznice").nastavPredmet(new Denik());
+        //System.out.println("Předmět byl přidán do ložnice");
+
+        getMistnost("koupelna").nastavPredmet(new SIMkarta());
+        //System.out.println("Předmět byl přidán do koupelny");
+
+        }
+    }
