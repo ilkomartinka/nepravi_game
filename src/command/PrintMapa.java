@@ -1,8 +1,6 @@
 package command;
-import svet.Svet;
+public class PrintMapa extends Command{
 
-public class PrintMapa implements Command{
-    private Svet svet = new Svet();
     @Override
     public String execute() {
         if(svet != null){

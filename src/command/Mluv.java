@@ -1,17 +1,20 @@
 package command;
 
-import svet.Postava;
+import postavy.Postava;
 
-public class Mluv implements Command {
+public class Mluv extends Command {
     private Postava postava;
+    private String stav;
 
-    public Mluv(Postava postava) {
+    public Mluv(Postava postava, String stav) {
         this.postava = postava;
+        this.stav = stav;
     }
 
     @Override
     public String execute() {
-        return "";
+        //bla bla bla
+        return postava.komunikace(stav);
     }
 
     @Override

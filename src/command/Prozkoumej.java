@@ -1,27 +1,24 @@
 package command;
 
-import hra.Hrac;
 import svet.Mistnost;
 
-public class Prozkoumej implements Command{
-    private Hrac hrac;
-    private Mistnost mistnost;
-    public Prozkoumej(Hrac hrac) {
-        this.hrac = hrac;
+public class Prozkoumej extends Command {
+    public Prozkoumej() {
     }
 
     @Override
     public String execute() {
-        this.mistnost = hrac.getAktualniMistnost();
+        Mistnost mistnost = hrac.getAktualniMistnost();
         System.out.println("Prohledavani mistnosti..." + mistnost);
-        if(mistnost.obsahujePredmet()){
-            mistnost.getPredmet().getNazev();
+        if (mistnost.obsahujePredmet()) {
+            return "Najden novy predmet -> " + mistnost.getPredmet().getNazev();
         }
-        return "V pokoji neni zadny predmet";
+        return "Zadny predmet nebyl najden";
     }
 
     @Override
     public boolean exit() {
         return false;
     }
+
 }

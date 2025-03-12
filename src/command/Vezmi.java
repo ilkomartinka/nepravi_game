@@ -2,14 +2,9 @@ package command;
 
 import hra.Hrac;
 import predmety.Predmet;
-import svet.Mistnost;
-
-public class Vezmi implements Command{
-
-    private Mistnost mistnost;
-    private Hrac hrac;
 
 
+public class Vezmi extends Command{
 
     public Vezmi() {
     }
@@ -18,12 +13,11 @@ public class Vezmi implements Command{
 
     @Override
     public String execute() {
-        this.hrac = new Hrac();
-        this.mistnost = hrac.getAktualniMistnost();
-        if(mistnost.obsahujePredmet()) {
-            Predmet p = mistnost.odebratPredmet();
-            hrac.pridatPredmet(p);
+        if(hrac.getAktualniMistnost().obsahujePredmet()) {
+            Predmet p = hrac.getAktualniMistnost().odebratPredmet();
+            hrac.doplneniInventare(p);
             System.out.println("Vzal jsi: " + p.getNazev());
+            return String.valueOf(hrac.getInventar());
         }
         return "V této místnosti není žádný předmět.";
     }

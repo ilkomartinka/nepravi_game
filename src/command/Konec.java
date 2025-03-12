@@ -1,9 +1,9 @@
 package command;
 
-public class Konec implements Command {
+public class Konec extends Command {
     @Override
     public String execute() {
-        return "";
+        return "Konec hry";
     }
 
     @Override
