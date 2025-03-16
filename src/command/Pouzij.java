@@ -1,13 +1,11 @@
 package command;
 
-import predmety.Baterka;
-import predmety.Klic;
 import predmety.Predmet;
 
 import java.util.Scanner;
 
 public class Pouzij extends Command {
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
     public Pouzij() {
 
@@ -15,20 +13,36 @@ public class Pouzij extends Command {
 
     @Override
     public String execute() {
-        System.out.println("Ktery predmet z inventare chces pouzit ->");
-        hrac.getInventar();
-        String predmet = sc.next();
-        if (hrac.maPredmet(predmet)) {
-            Predmet p = hrac.odebratPredmet(predmet);
-            System.out.println(p.pouziti());
+        if (!hrac.getInventar().isEmpty()) {
+            System.out.print(hrac.getInventar());
+            System.out.print("\nKtery predmet z inventare chces pouzit (zpet)-> ");
+            String predmet = sc.next();
+            if (hrac.maPredmet(predmet)) {
+                switch (predmet) {
+                    case "SIMkarta":
+                        if (!hrac.maPredmet("mobil")) {
+                            return "k pouziti simkarty potrebujes mobil";
+                        }
+                    case "mobil":
+                        if (!hrac.maPredmet("SIMkarta")) {
+                            return "nemuzes nikomu zavolat, chybi ti SIMkarta";
+                        }
+                    case "baterka":
+                        if (!hrac.getAktualniMistnost().getNazev().equals("sklep")) {
+                            return "doporucuju pouzit v sklepe, je tam priserna tma";
+                        }
+                    default:
+                        Predmet p = hrac.odebratPredmet(predmet);
+                        System.out.println(p.pouziti());
+                }
+            } else {
+                return "Tento predmet nelze pouzit";
+            }
         } else {
-            return "Tento predmet nelze pouzit";
+            return "Tvůj inventář je prázdný.";
         }
         return "";
     }
 
-    @Override
-    public boolean exit() {
-        return false;
-    }
+
 }

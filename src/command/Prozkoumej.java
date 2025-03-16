@@ -1,5 +1,5 @@
 package command;
-
+import predmety.Predmet;
 import svet.Mistnost;
 
 public class Prozkoumej extends Command {
@@ -9,16 +9,11 @@ public class Prozkoumej extends Command {
     @Override
     public String execute() {
         Mistnost mistnost = hrac.getAktualniMistnost();
-        System.out.println("Prohledavani mistnosti..." + mistnost);
-        if (mistnost.obsahujePredmet()) {
-            return "Najden novy predmet -> " + mistnost.getPredmet().getNazev();
+        System.out.println("Prohledavani mistnosti..." + mistnost.getNazev());
+        if(mistnost.obsahujePredmet()){
+            Predmet predmet = mistnost.getPredmet().values().iterator().next();
+            return "Nalezen novy predmet -> " + predmet.toString();
         }
-        return "Zadny predmet nebyl najden";
+        return "Zadny predmet nebyl nelezen";
     }
-
-    @Override
-    public boolean exit() {
-        return false;
-    }
-
 }

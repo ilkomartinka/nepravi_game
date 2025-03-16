@@ -1,24 +1,16 @@
 package command;
 
 import postavy.Postava;
+import svet.Mistnost;
 
 public class Mluv extends Command {
-    private Postava postava;
     private String stav;
-
-    public Mluv(Postava postava, String stav) {
-        this.postava = postava;
-        this.stav = stav;
-    }
-
     @Override
     public String execute() {
         //bla bla bla
-        return postava.komunikace(stav);
+        Mistnost mistnost = hrac.getAktualniMistnost();
+       // return postava.komunikace(stav);
+        return "postavy zatim nechteji komunikovat :D";
     }
 
-    @Override
-    public boolean exit() {
-        return false;
-    }
 }
