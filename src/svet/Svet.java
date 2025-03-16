@@ -1,71 +1,61 @@
 package svet;
 
-import predmety.*;
+import predmety.Baterka;
+import predmety.Denik;
+import predmety.Klic;
+import predmety.SIMkarta;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 public class Svet {
-    public HashMap<Mistnost, ArrayList<Mistnost>> svet = new HashMap();
+    private HashMap<String,Mistnost> mapa; // <název místnosti, objekt, který obsahuje podrobnosti o místnosti>
 
     public Svet() {
+        this.mapa = new HashMap<>();
         nacteniMapy();
         pridaniPredmetu();
     }
-
-    private void nacteniMapy() {
-        try (BufferedReader br = new BufferedReader(new FileReader("mapa.txt"))) {
+    public void nacteniMapy(){
+        try(BufferedReader reader = new BufferedReader(new FileReader("mapa.txt"));){
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] mistnosti = line.split(" ");
-                Mistnost mistnost = new Mistnost(mistnosti[0]);
-                ArrayList<Mistnost> mistnostiVedle = new ArrayList<>();
-                for (int i = 1; i < mistnosti.length; i++) {
-                    mistnostiVedle.add(new Mistnost(mistnosti[i]));
-                }
-                svet.put(mistnost, mistnostiVedle);
-            }
+                String mistnost = mistnosti[0];
 
-        } catch (IOException e) {
+                mapa.putIfAbsent(mistnost, new Mistnost(mistnost)); // Pokud místnost ještě neexistuje v mapě, přidáme ji
+
+                for (int i = 1; i < mistnosti.length; i++) {
+                    String mistnostVedle = mistnosti[i];
+                    mapa.putIfAbsent(mistnostVedle, new Mistnost(mistnostVedle));
+                    mapa.get(mistnost).pridaniMistnosti(mistnostVedle); // Přidání propojení mezi hlavní místností a sousední místností
+                }
+            }
+        }catch (IOException e){
             e.printStackTrace();
         }
     }
-
-    public ArrayList<Mistnost> moznostPohybu(Mistnost mistnost) {
-        return svet.get(mistnost);
-    }
-
-    public void printMap() {
-        for (Map.Entry<Mistnost, ArrayList<Mistnost>> entry : svet.entrySet()) {
-            System.out.println(entry.getKey() + " -> " + entry.getValue());
-        }
-    }
-    public Mistnost getMistnost(String nazev) {
-        for (Mistnost mistnost : svet.keySet()) {
-            if (mistnost.getNazev().equals(nazev)) {
-                return mistnost;
+    public String printMapa() {
+        StringBuilder mapaString = new StringBuilder();
+        if (!mapa.isEmpty()) {
+            for (Mistnost mistnost : mapa.values()) {
+                mapaString.append(mistnost.getNazev())
+                        .append(" -> ")
+                        .append(mistnost.getSousedniMistnosti())
+                        .append("\n");
             }
         }
-        return null;
+        return mapaString.toString();
     }
 
-//PRIDAVA SE JENOM BATERKA, POMOC
     public void pridaniPredmetu() {
-       getMistnost("kuchyn").nastavPredmet(new Klic());
-        //System.out.println("Předmět byl přidán do kuchyně");
-
-        getMistnost("detska").nastavPredmet(new Baterka());
-        //System.out.println("Předmět byl přidán do dětského pokoje");
-
-        getMistnost("loznice").nastavPredmet(new Denik());
-        //System.out.println("Předmět byl přidán do ložnice");
-
-        getMistnost("koupelna").nastavPredmet(new SIMkarta());
-        //System.out.println("Předmět byl přidán do koupelny");
-
-        }
+        mapa.get("kuchyn").pridaniPredmetu("klic", new Klic());
+        mapa.get("detska").pridaniPredmetu("baterka", new Baterka());
+        mapa.get("loznice").pridaniPredmetu("denik", new Denik());
+        mapa.get("koupelna").pridaniPredmetu("SIMkarta", new SIMkarta());
     }
+
+    public HashMap<String, Mistnost> getMapa() {
+        return mapa;
+    }
+}

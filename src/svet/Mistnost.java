@@ -1,13 +1,60 @@
 package svet;
+
 import predmety.Predmet;
+
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
+
 public class Mistnost {
     private String nazev;
-    private Predmet predmet;
+    private HashMap<String, Predmet> predmety; //<nazev predmetu, predmet>
+    private HashSet<String> sousedniMistnosti;
+    private boolean zamceno;
+    private Predmet pomocnyPredmet; //k otevreni mistnosti
 
     public Mistnost(String name) {
         this.nazev = name;
+        this.sousedniMistnosti = new HashSet<>();
+        this.predmety = new HashMap<>();
+        this.zamceno = false;
     }
+
+
+    public void pridaniPredmetu(String nazevPredmetu, Predmet predmet) {
+        predmety.put(nazevPredmetu, predmet);
+    }
+
+    public Predmet odebraniPredmetu() {
+        if (!predmety.isEmpty()) {
+            String key = predmety.keySet().iterator().next();
+            return predmety.remove(key);
+        }
+        return null;
+    }
+
+    public boolean obsahujePredmet() {
+        return !predmety.isEmpty();
+    }
+
+
+    public HashMap<String, Predmet> getPredmet() {
+        return predmety;
+    }
+
+    public void setLock(boolean zamceno, Predmet PomocnyPredmet) {
+        this.zamceno = zamceno;
+        this.pomocnyPredmet = PomocnyPredmet;
+    }
+
+    public Predmet getPomocnyPredmet() {
+        return pomocnyPredmet;
+    }
+
+    public boolean isZamceno() {
+        return zamceno;
+    }
+
     @Override
     public String toString() {
         return nazev;
@@ -25,29 +72,16 @@ public class Mistnost {
         return Objects.hashCode(nazev);
     }
 
-    public Predmet nastavPredmet(Predmet predmet){
-        this.predmet = predmet;
-        return predmet;
-    }
 
-    public Predmet odebratPredmet()    {
-        if(predmet != null) {
-            Predmet odebrany = predmet;
-            predmet = null;
-            return odebrany;
-        }
-        return null;
-    }
-
-    public boolean obsahujePredmet() {
-        return predmet != null;
-    }
-
-    public Predmet getPredmet() {
-        return predmet;
-    }
     public String getNazev() {
         return nazev;
     }
 
+    public void pridaniMistnosti(String mistnost) {
+        sousedniMistnosti.add(mistnost);
+    }
+
+    public HashSet<String> getSousedniMistnosti() {
+        return sousedniMistnosti;
+    }
 }
