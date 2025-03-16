@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Hra {
-    private Scanner sc = new Scanner(System.in);
-    private HashMap<String, Command> prikazy = new HashMap<>();
-    private boolean exit = false;
+    private final Scanner sc = new Scanner(System.in);
+    private final HashMap<String, Command> prikazy = new HashMap<>();
     private final Svet svet = new Svet();
-    private final Hrac hrac = new Hrac();;
-    Mistnost aktualniMistnost = svet.getMistnost("detska");
+    private final Hrac hrac = new Hrac();
+    Mistnost aktualniMistnost = svet.getMapa().get("detska");
+
     public void initialization() {
         hrac.setAktualniMistnost(aktualniMistnost);
         prikazy.put("jdi", new Pohyb());
@@ -23,6 +23,7 @@ public class Hra {
         prikazy.put("konec", new Konec());
         prikazy.put("pouzij", new Pouzij());
         prikazy.put("napoveda", new Napoveda());
+        prikazy.put("mluv", new Mluv());
         for (Command cmd : prikazy.values()) {
             cmd.set(hrac, svet);
         }
@@ -41,6 +42,7 @@ public class Hra {
 
     public void start() {
         initialization();
+        boolean exit = false;
         do {
             doIt();
         } while (!exit);

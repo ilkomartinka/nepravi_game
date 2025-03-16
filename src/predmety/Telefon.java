@@ -1,9 +1,6 @@
 package predmety;
 
-import hra.Hrac;
-
-public class Telefon extends Predmet{
-    private boolean finguje = false;
+public class Telefon extends Predmet {
 
     public Telefon() {
         super("telefon");
@@ -11,10 +8,6 @@ public class Telefon extends Predmet{
 
     @Override
     public String pouziti() {
-        if(finguje){
-            return "Volame pomoc!!!Buď však opatrný, prarodiče si mohou všimnout, že telefonuješ.";
-        }else{
-            return "Nejdriv ho musis opravit";
-        }
+        return "Volame pomoc!!!Buď však opatrný, prarodiče si mohou všimnout, že telefonuješ.";
     }
 }

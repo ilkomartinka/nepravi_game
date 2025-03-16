@@ -43,15 +43,11 @@ public class Hrac {
     }
 
     public String getInventar() {
-        if(inventar.isEmpty()){
-            System.out.println("Tvůj inventář je prázdný.");
-        }else{
-            System.out.print("Inventář: ");
-            for(Predmet p : inventar){
-               return "- " + p.getNazev();
-            }
+        StringBuilder sb = new StringBuilder("Inventář: ");
+        for (Predmet p : inventar) {
+            sb.append("-").append(p.getNazev()).append(" ");
         }
-        return "Nastala chyba";
+        return sb.toString().trim();
     }
 
     public boolean maPredmet(String p) {

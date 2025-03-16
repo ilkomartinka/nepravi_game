@@ -7,6 +7,6 @@ public class SIMkarta extends Predmet {
 
     @Override
     public String pouziti() {
-        return "Vložil jsi SIM kartu do mobilu, teď je čas ho využít. Buď však opatrný, prarodiče si mohou všimnout, že telefonuješ.";
-    }
+            return "Vložil jsi SIM kartu do mobilu, teď je čas ho využít. Buď však opatrný, prarodiče si mohou všimnout, že telefonuješ.";
+        }
 }
