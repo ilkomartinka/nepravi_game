@@ -1,10 +1,12 @@
 package hra;
 
 import command.*;
+import postavy.Postava;
 import svet.Mistnost;
 import svet.Svet;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Hra {
@@ -27,6 +29,7 @@ public class Hra {
         for (Command cmd : prikazy.values()) {
             cmd.set(hrac, svet);
         }
+        vstupniText();
     }
 
     public void doIt() {
@@ -36,7 +39,7 @@ public class Hra {
         if (prikazy.containsKey(odpoved)) {
             System.out.println(prikazy.get(odpoved).execute());
         } else {
-            System.out.println("Prikaz nenajden: " + odpoved);
+            System.out.println("Prikaz nenalezen: " + odpoved);
         }
     }
 
@@ -51,4 +54,19 @@ public class Hra {
     private void getPrikazy() {
         System.out.print("Prikazy: " + prikazy.keySet());
     }
+
+    private void vstupniText() {
+        System.out.println("Vítejte ve hře 'Nepraví'!" +
+                "\nStaré venkovské sídlo se tyčilo před vámi, obklopené vysokými stromy." +
+                "\nVypadalo pohádkově..." +
+                "\nDveře se otevřely. Stáli tam. Babička a děda. Usmívali se.");
+
+        for (Mistnost mistnost : svet.getMapa().values()) {
+            if (mistnost.getPostava() != null) {
+                System.out.println(mistnost.getPostava().komunikace("uvod") + "\nRychle seznameni -> " + mistnost.getPostava());
+            }
+        }
+        System.out.println("Ted stojis v " + hrac.getAktualniMistnost().getNazev() + ". Atˇ se dari!");
+    }
 }
+

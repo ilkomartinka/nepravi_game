@@ -7,11 +7,13 @@ public abstract class Postava {
     protected String jmeno;
     protected String popis;
     protected HashMap<String, String> komunikaceMap;
+    protected String stav;
 
     public Postava(String jmeno, String popis) {
         this.jmeno = jmeno;
         this.popis = popis;
         this.komunikaceMap = new HashMap<>();
+        this.stav = jmeno + "-" + popis;
     }
 
     public String getJmeno() {
@@ -28,5 +30,18 @@ public abstract class Postava {
 
     public String komunikace(String stav) {
         return komunikaceMap.getOrDefault(stav, "Tato postava mlčí.");
+    }
+
+    public void setStav(String stav) {
+        this.stav = stav;
+    }
+
+    public String getStav() {
+        return stav;
+    }
+
+    @Override
+    public String toString() {
+        return jmeno + ": " + popis;
     }
 }

@@ -15,7 +15,7 @@ public class Pouzij extends Command {
     public String execute() {
         if (!hrac.getInventar().isEmpty()) {
             System.out.print(hrac.getInventar());
-            System.out.print("\nKtery predmet z inventare chces pouzit (zpet)-> ");
+            System.out.print("\nKtery predmet z inventare chces pouzit -> ");
             String predmet = sc.next();
             if (hrac.maPredmet(predmet)) {
                 switch (predmet) {

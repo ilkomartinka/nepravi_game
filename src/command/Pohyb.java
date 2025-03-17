@@ -30,9 +30,11 @@ public class Pohyb extends Command {
                         System.out.println("Nedostanes se sem");
                         break;
                     default:
-                        System.out.println("Nechapu co po mne chces");
+                        System.out.println("Co jeee");
                 }
-            }
+            }/*else if(zvolenaMistnost.equals("obyvak")){
+                zvolenaMistnost.getPostava().setStav("2");
+            }*/
             hrac.setAktualniMistnost(zvolenaMistnost);
         } else {
             return "Chybicka";

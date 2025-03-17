@@ -1,5 +1,6 @@
 package svet;
 
+import postavy.Postava;
 import predmety.Predmet;
 
 import java.util.HashMap;
@@ -12,12 +13,14 @@ public class Mistnost {
     private HashSet<String> sousedniMistnosti;
     private boolean zamceno;
     private Predmet pomocnyPredmet; //k otevreni mistnosti
+    private Postava postava;
 
     public Mistnost(String name) {
         this.nazev = name;
         this.sousedniMistnosti = new HashSet<>();
         this.predmety = new HashMap<>();
         this.zamceno = false;
+        this.postava = null;
     }
 
 
@@ -83,5 +86,16 @@ public class Mistnost {
 
     public HashSet<String> getSousedniMistnosti() {
         return sousedniMistnosti;
+    }
+    public void pridatPostavu(Postava postava) {
+        if (this.postava == null) {
+            this.postava = postava;
+        } else {
+            System.out.println("V této místnosti je již postava.");
+        }
+    }
+
+    public Postava getPostava() {
+        return postava;
     }
 }

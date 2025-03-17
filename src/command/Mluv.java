@@ -4,13 +4,20 @@ import postavy.Postava;
 import svet.Mistnost;
 
 public class Mluv extends Command {
-    private String stav;
+
     @Override
     public String execute() {
-        //bla bla bla
         Mistnost mistnost = hrac.getAktualniMistnost();
-       // return postava.komunikace(stav);
-        return "postavy zatim nechteji komunikovat :D";
+        if (mistnost != null) {
+            Postava postava = mistnost.getPostava();
+            if (postava != null) {
+                return postava.komunikace(postava.getStav());
+            } else {
+                return "V této místnosti není nikdo, kdo by s tebou mluvil.";
+            }
+        }
+        return "Nemůžeš mluvit, protože nejsi v místnosti.";
     }
-
 }
+
+
