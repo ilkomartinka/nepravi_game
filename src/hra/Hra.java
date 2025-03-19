@@ -56,17 +56,32 @@ public class Hra {
     }
 
     private void vstupniText() {
-        System.out.println("Vítejte ve hře 'Nepraví'!" +
+        System.out.println("Vítejte ve hře: " + "\n"+
+                "███╗   ██╗███████╗██████╗ ██████╗  █████╗ ██╗   ██╗██╗\n" +
+                "████╗  ██║██╔════╝██╔══██╗██╔══██╗██╔══██╗██║   ██║██║\n" +
+                "██╔██╗ ██║█████╗  ██████╔╝██████╔╝███████║██║   ██║██║\n" +
+                "██║╚██╗██║██╔══╝  ██╔═══╝ ██╔══██╗██╔══██║╚██╗ ██╔╝██║\n" +
+                "██║ ╚████║███████╗██║     ██║  ██║██║  ██║ ╚████╔╝ ██║\n" +
+                "╚═╝  ╚═══╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝\n" +
+                "                                                      " +
                 "\nStaré venkovské sídlo se tyčilo před vámi, obklopené vysokými stromy." +
                 "\nVypadalo pohádkově..." +
-                "\nDveře se otevřely. Stáli tam. Babička a děda. Usmívali se.");
+                "\nDveře se otevřely. Stáli tam. Babička a děda. Usmívali se.\n");
 
         for (Mistnost mistnost : svet.getMapa().values()) {
             if (mistnost.getPostava() != null) {
                 System.out.println(mistnost.getPostava().komunikace("uvod") + "\nRychle seznameni -> " + mistnost.getPostava());
             }
         }
-        System.out.println("Ted stojis v " + hrac.getAktualniMistnost().getNazev() + ". Atˇ se dari!");
+        System.out.println("Ted stojiš v mistnosti: " + hrac.getAktualniMistnost().getNazev() + ". Atˇ se daří!");
+
+    }
+
+    private void konec(){
+        System.out.println("Hlas na druhé straně odpovídá:\n" +
+                "\n„Pomoc přijde co nejdříve, držte se!“\n" +
+                "\nCítíš, jak z tebe padá veškeré napětí. Na chvíli se zastavíš a přemýšlíš, jak těžké to všechno bylo. Ale teď je to u konce." +
+                "\nGratulujeme, právě jsi vyhrál(a)!");
     }
 }
 

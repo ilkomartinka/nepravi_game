@@ -1,6 +1,8 @@
 package svet;
 
+import hra.Hrac;
 import postavy.NepraviPrarodice;
+import postavy.Postava;
 import postavy.PraviPrarodice;
 import postavy.Segra;
 import predmety.*;
@@ -16,6 +18,8 @@ public class Svet {
         nacteniMapy();
         pridaniPredmetu();
         pridaniPostav();
+        mapa.get("tajna").setLock(true, "klic");
+        mapa.get("sklep").setLock(true, "heslo");
     }
 
     public void nacteniMapy() {
@@ -56,10 +60,11 @@ public class Svet {
         mapa.get("detska").pridaniPredmetu("baterka", new Baterka());
         mapa.get("loznice").pridaniPredmetu("denik", new Denik());
         mapa.get("koupelna").pridaniPredmetu("SIMkarta", new SIMkarta());
+        mapa.get("sklep").pridaniPredmetu("telefon", new Telefon());
     }
 
     public void pridaniPostav() {
-        //mapa.get("sklep").pridatPostavu(new PraviPrarodice());
+        mapa.get("sklep").pridatPostavu(new PraviPrarodice());
         mapa.get("obyvak").pridatPostavu(new NepraviPrarodice());
         mapa.get("detska").pridatPostavu(new Segra());
     }
@@ -68,4 +73,20 @@ public class Svet {
         return mapa;
     }
 
+    public Segra najdiSegru() {
+        for (Mistnost mistnost : mapa.values()) {
+            if (mistnost.getPostava() instanceof Segra) {
+                return (Segra) mistnost.getPostava();
+            }
+        }
+        return null;
+    }
+
+    public void presunSegru(Mistnost novaMistnost) {
+        Segra segra = najdiSegru();
+        if (segra != null) {
+            segra.setPoloha(novaMistnost);
+            novaMistnost.pridatPostavu(segra);
+        }
+    }
 }

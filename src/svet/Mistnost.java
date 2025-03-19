@@ -12,7 +12,7 @@ public class Mistnost {
     private HashMap<String, Predmet> predmety; //<nazev predmetu, predmet>
     private HashSet<String> sousedniMistnosti;
     private boolean zamceno;
-    private Predmet pomocnyPredmet; //k otevreni mistnosti
+    private String pomocnyPredmet; //k otevreni mistnosti
     private Postava postava;
 
     public Mistnost(String name) {
@@ -22,7 +22,6 @@ public class Mistnost {
         this.zamceno = false;
         this.postava = null;
     }
-
 
     public void pridaniPredmetu(String nazevPredmetu, Predmet predmet) {
         predmety.put(nazevPredmetu, predmet);
@@ -45,12 +44,12 @@ public class Mistnost {
         return predmety;
     }
 
-    public void setLock(boolean zamceno, Predmet PomocnyPredmet) {
+    public void setLock(boolean zamceno, String PomocnyPredmet) {
         this.zamceno = zamceno;
         this.pomocnyPredmet = PomocnyPredmet;
     }
 
-    public Predmet getPomocnyPredmet() {
+    public String getPomocnyPredmet() {
         return pomocnyPredmet;
     }
 
@@ -90,12 +89,14 @@ public class Mistnost {
     public void pridatPostavu(Postava postava) {
         if (this.postava == null) {
             this.postava = postava;
-        } else {
-            System.out.println("V této místnosti je již postava.");
         }
     }
 
     public Postava getPostava() {
         return postava;
+    }
+
+    public void setZamceno(boolean zamceno) {
+        this.zamceno = zamceno;
     }
 }

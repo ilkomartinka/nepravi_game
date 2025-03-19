@@ -2,7 +2,6 @@ package postavy;
 
 import java.util.HashMap;
 
-
 public abstract class Postava {
     protected String jmeno;
     protected String popis;
@@ -29,7 +28,7 @@ public abstract class Postava {
     }
 
     public String komunikace(String stav) {
-        return komunikaceMap.getOrDefault(stav, "Tato postava mlčí.");
+        return komunikaceMap.getOrDefault(stav, "...");
     }
 
     public void setStav(String stav) {
@@ -44,4 +43,6 @@ public abstract class Postava {
     public String toString() {
         return jmeno + ": " + popis;
     }
+
+
 }
