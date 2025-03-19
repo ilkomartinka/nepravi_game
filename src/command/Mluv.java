@@ -1,6 +1,8 @@
 package command;
 
+import postavy.NepraviPrarodice;
 import postavy.Postava;
+import postavy.Segra;
 import svet.Mistnost;
 
 public class Mluv extends Command {
@@ -10,13 +12,18 @@ public class Mluv extends Command {
         Mistnost mistnost = hrac.getAktualniMistnost();
         if (mistnost != null) {
             Postava postava = mistnost.getPostava();
-            if (postava != null) {
-                return postava.komunikace(postava.getStav());
+            if (postava instanceof NepraviPrarodice) {
+                return ((NepraviPrarodice) postava).ziskatNahodnouRepliku();
+            } else if (postava instanceof Segra) {
+                Segra segra = (Segra) postava;
+                String odpoved = segra.komunikace(segra.getStav());
+                segra.nastavNovyStav();
+                return odpoved;
             } else {
                 return "V této místnosti není nikdo, kdo by s tebou mluvil.";
             }
         }
-        return "Nemůžeš mluvit, protože nejsi v místnosti.";
+        return "Nemůžeš mluvit";
     }
 }
 
