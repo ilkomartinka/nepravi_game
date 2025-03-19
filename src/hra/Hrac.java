@@ -1,5 +1,6 @@
 package hra;
 
+import postavy.Segra;
 import predmety.Predmet;
 import svet.Mistnost;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 public class Hrac {
     private ArrayList<Predmet> inventar;
     private Mistnost aktualniMistnost;
+
 
     public Hrac() {
         this.inventar = new ArrayList<>();

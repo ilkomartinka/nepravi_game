@@ -1,6 +1,7 @@
 package command;
 
 import predmety.Predmet;
+import svet.Mistnost;
 
 import java.util.Scanner;
 
@@ -30,6 +31,15 @@ public class Pouzij extends Command {
                     case "baterka":
                         if (!hrac.getAktualniMistnost().getNazev().equals("sklep")) {
                             return "doporucuju pouzit v sklepe, je tam priserna tma";
+                        }
+                    case "klic":
+                        if (hrac.getAktualniMistnost().getNazev().equals("loznice")) {
+                            Mistnost tajnaMistnost = svet.getMapa().get("tajna");
+                            if (tajnaMistnost.isZamceno()) {
+                                tajnaMistnost.setZamceno(false);
+                            }
+                        }else{
+                            return "doporucuju pouzit k otevreni zamcene mistnosti";
                         }
                     default:
                         Predmet p = hrac.odebratPredmet(predmet);

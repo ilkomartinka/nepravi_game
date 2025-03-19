@@ -1,7 +1,5 @@
 package predmety;
 
-import svet.Mistnost;
-
 public class Klic extends Predmet {
 
     public Klic() {
@@ -10,6 +8,6 @@ public class Klic extends Predmet {
 
     @Override
     public String pouziti() {
-        return "Použil jsi klíč a otevřel sklep. Nyní můžeš vstoupit do sklepa.";
+        return "Použil jsi klíč a otevřel jsi tajnou mistnost.";
     }
 }

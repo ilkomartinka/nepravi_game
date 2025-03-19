@@ -1,5 +1,8 @@
 package command;
 
+import postavy.NepraviPrarodice;
+import postavy.Postava;
+import postavy.Segra;
 import svet.Mistnost;
 
 import java.util.Scanner;
@@ -24,20 +27,27 @@ public class Pohyb extends Command {
                 String odpoved = sc.next();
                 switch (odpoved) {
                     case "A":
-                        System.out.println("Tak to pouzij");
-                        break;
+                        System.out.println("Tak ho použij");
+                        if (zvolenaMistnost.getNazev().equals("sklep")) {
+                            System.out.println("Zadej heslo: ");
+                            int heslo = sc.nextInt();
+                            if (heslo == 1201) {
+                                zvolenaMistnost.setZamceno(false);
+                            } else {
+                                return "ŠPATNĚ, zkus znova :)";
+                            }
+                            break;
+                        }
                     case "N":
-                        System.out.println("Nedostanes se sem");
+                        System.out.println("Vrat se zpatky a zkus prohledat mistnosti");
                         break;
                     default:
-                        System.out.println("Co jeee");
+                        return "pipipupu chybicka";
                 }
-            }/*else if(zvolenaMistnost.equals("obyvak")){
-                zvolenaMistnost.getPostava().setStav("2");
-            }*/
-            hrac.setAktualniMistnost(zvolenaMistnost);
-        } else {
-            return "Chybicka";
+            }else{
+                hrac.setAktualniMistnost(zvolenaMistnost);
+                svet.presunSegru(zvolenaMistnost);
+            }
         }
         return "Ted se nachazis v -> " + hrac.getAktualniMistnost();
     }
