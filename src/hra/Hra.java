@@ -2,6 +2,7 @@ package hra;
 
 import command.*;
 import postavy.Postava;
+import postavy.PraviPrarodice;
 import svet.Mistnost;
 import svet.Svet;
 
@@ -69,8 +70,13 @@ public class Hra {
                 "\nDveře se otevřely. Stáli tam. Babička a děda. Usmívali se.\n");
 
         for (Mistnost mistnost : svet.getMapa().values()) {
-            if (mistnost.getPostava() != null) {
-                System.out.println(mistnost.getPostava().komunikace("uvod") + "\nRychle seznameni -> " + mistnost.getPostava());
+            if (mistnost.getPostava() != null ) {
+                if(mistnost.getPostava() instanceof PraviPrarodice){
+                    System.out.println(" ");
+                }else{
+                    System.out.println(mistnost.getPostava().komunikace("uvod") + "\nRychle seznameni -> " + mistnost.getPostava());
+                }
+
             }
         }
         System.out.println("Ted stojiš v mistnosti: " + hrac.getAktualniMistnost().getNazev() + ". Atˇ se daří!");

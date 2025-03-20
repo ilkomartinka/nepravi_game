@@ -2,6 +2,7 @@ package command;
 
 import postavy.NepraviPrarodice;
 import postavy.Postava;
+import postavy.PraviPrarodice;
 import postavy.Segra;
 import svet.Mistnost;
 
@@ -20,8 +21,8 @@ public class Mluv extends Command {
                 segra.nastavNovyStav();
                 return odpoved;
             } else if(hrac.getAktualniMistnost().getNazev().equals("sklep")){
-                mistnost.getPostava().toString();
-                mistnost.getPostava().komunikace(postava.getStav());
+                PraviPrarodice praviPrarodice = (PraviPrarodice) postava;
+                System.out.println(praviPrarodice.komunikace("uvod"));
             }else {
                 return "V této místnosti není nikdo, kdo by s tebou mluvil.";
             }

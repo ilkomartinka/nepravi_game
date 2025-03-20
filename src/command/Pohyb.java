@@ -39,8 +39,9 @@ public class Pohyb extends Command {
                                 zvolenaMistnost.setZamceno(false);
                                 hrac.setAktualniMistnost(zvolenaMistnost);
                                 System.out.println(svet.najdiSegru().komunikace("sklep"));
-                                System.out.println(aktualniMistnost.getPostava().getJmeno() +" -> "+ aktualniMistnost.getPostava().getPopis());
-                                aktualniMistnost.getPostava().komunikace("uvod");
+                                //System.out.println(aktualniMistnost.getPostava().getJmeno() +" -> "+ aktualniMistnost.getPostava().getPopis());
+                               // System.out.println("Rychle seznameni -> " + aktualniMistnost.getPostava());
+                                //aktualniMistnost.getPostava().komunikace("uvod");
                             } else {
                                 return "ŠPATNĚ, zkus znova :)";
                             }
