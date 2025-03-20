@@ -5,6 +5,7 @@ import postavy.Postava;
 import postavy.Segra;
 import svet.Mistnost;
 
+import java.lang.management.MonitorInfo;
 import java.util.Scanner;
 
 public class Pohyb extends Command {
@@ -27,12 +28,19 @@ public class Pohyb extends Command {
                 String odpoved = sc.next();
                 switch (odpoved) {
                     case "A":
-                        System.out.println("Tak ho použij");
-                        if (zvolenaMistnost.getNazev().equals("sklep")) {
+                        if(zvolenaMistnost.getNazev().equals("tajna") && hrac.maPredmet("klic")){//System.out.println("Tak ho použij");
+                            zvolenaMistnost.setZamceno(false);
+                            hrac.setAktualniMistnost(zvolenaMistnost);
+                            break;
+                        }else if (zvolenaMistnost.getNazev().equals("sklep")) {
                             System.out.println("Zadej heslo: ");
                             int heslo = sc.nextInt();
                             if (heslo == 1201) {
                                 zvolenaMistnost.setZamceno(false);
+                                hrac.setAktualniMistnost(zvolenaMistnost);
+                                System.out.println(svet.najdiSegru().komunikace("sklep"));
+                                System.out.println(aktualniMistnost.getPostava().getJmeno() +" -> "+ aktualniMistnost.getPostava().getPopis());
+                                aktualniMistnost.getPostava().komunikace("uvod");
                             } else {
                                 return "ŠPATNĚ, zkus znova :)";
                             }
