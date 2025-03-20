@@ -16,15 +16,20 @@ public class Prozkoumej extends Command {
         if (mistnost.obsahujePredmet()) {
             Predmet predmet = mistnost.getPredmet().values().iterator().next();
             return "Nalezen novy predmet -> " + predmet.toString();
-        } else if (mistnost.getNazev().equals("obyvak")) {
-            mistnost.getPostava().setStav("podezreni");
-            return mistnost.getPostava().komunikace(mistnost.getPostava().getStav());
-        } else if (mistnost.getNazev().equals("tajna")) {
-            System.out.println(segra.komunikace("odhaleni"));
-        }else if(mistnost.getNazev().equals("knihovna")){
-            System.out.println(segra.komunikace("heslo"));
         }
-        return "Zadny predmet nebyl nelezen";
+        switch ((mistnost.getNazev())){
+            case "obyvak":
+                mistnost.getPostava().setStav("podezreni");
+                return mistnost.getPostava().komunikace(mistnost.getPostava().getStav());
+            case "tajna":
+                return segra.komunikace("odhaleni");
+            case "knihovna":
+                return segra.komunikace("heslo");
+            case "sklep":
+                return mistnost.getPostava().komunikace("vysvetleni");
+            default:
+                return "Zadny predmet nebyl nelezen";
+        }
     }
 
 }

@@ -19,12 +19,13 @@ public class Mluv extends Command {
                 String odpoved = segra.komunikace(segra.getStav());
                 segra.nastavNovyStav();
                 return odpoved;
-            } else {
+            } else if(hrac.getAktualniMistnost().getNazev().equals("sklep")){
+                mistnost.getPostava().toString();
+                mistnost.getPostava().komunikace(postava.getStav());
+            }else {
                 return "V této místnosti není nikdo, kdo by s tebou mluvil.";
             }
         }
         return "Nemůžeš mluvit";
     }
 }
-
-
