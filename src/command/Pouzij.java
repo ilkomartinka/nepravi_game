@@ -13,36 +13,51 @@ public class Pouzij extends Command {
     }
 
     @Override
-    public String execute() {
+    public String execute() { //vymyslet lepsi reseni
         if (!hrac.getInventar().isEmpty()) {
             System.out.print(hrac.getInventar());
             System.out.print("\nKtery predmet z inventare chces pouzit -> ");
             String predmet = sc.next();
             if (hrac.maPredmet(predmet)) {
+                Predmet p = hrac.getPredmet(predmet);
                 switch (predmet) {
                     case "SIMkarta":
-                        if (!hrac.maPredmet("mobil")) {
+                        if (!hrac.maPredmet("telefon")) {
                             return "k pouziti simkarty potrebujes mobil";
+                        }else{
+                            System.out.println(p.pouziti());
+                            hrac.odebratPredmet(p.getNazev());
                         }
-                    case "mobil":
+                        break;
+                    case "telefon":
                         if (!hrac.maPredmet("SIMkarta")) {
-                            return "nemuzes nikomu zavolat, chybi ti SIMkarta";
+                            return "nemuzes nikomu zavolat, potrebujes SIMkartu";
+                        } else {
+                            System.out.println(p.pouziti());
+                            System.exit(0);
                         }
+                        break;
                     case "baterka":
                         if (!hrac.getAktualniMistnost().getNazev().equals("sklep")) {
                             return "doporucuju pouzit v sklepe, je tam priserna tma";
+                        }else{
+                            System.out.println(p.pouziti());
                         }
+                        break;
                     case "klic":
                         if (hrac.getAktualniMistnost().getNazev().equals("loznice")) {
                             Mistnost tajnaMistnost = svet.getMapa().get("tajna");
                             if (tajnaMistnost.isZamceno()) {
                                 tajnaMistnost.setZamceno(false);
+                                System.out.println(p.pouziti());
+                                hrac.odebratPredmet(p.getNazev());
                             }
-                        }else{
+                        } else {
                             return "doporucuju pouzit k otevreni zamcene mistnosti";
                         }
+                        break;
                     default:
-                        Predmet p = hrac.odebratPredmet(predmet);
+                        hrac.odebratPredmet(p.getNazev());
                         System.out.println(p.pouziti());
                 }
             } else {
@@ -53,6 +68,4 @@ public class Pouzij extends Command {
         }
         return "";
     }
-
-
 }

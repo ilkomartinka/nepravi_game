@@ -9,12 +9,13 @@ public class Vezmi extends Command {
 
     @Override
     public String execute() {
-        if (hrac.getAktualniMistnost().obsahujePredmet()) {
+        if (hrac.getAktualniMistnost().obsahujePredmet() && hrac.getAktualniMistnost().isProhledano()) {
             Predmet p = hrac.getAktualniMistnost().odebraniPredmetu();
             hrac.doplneniInventare(p);
             return "Vzal jsi: " + p.getNazev();
+        }else{
+            return "Mistnost nejdtiv musis prohledat nebo v této místnosti není žádný předmět.";
         }
-        return "V této místnosti není žádný předmět.";
     }
 
 
