@@ -60,5 +60,14 @@ public class Hrac {
         }
         return false;
     }
+    public Predmet getPredmet(String nazev) {
+        for (Predmet predmet : inventar) {
+            if (predmet.getNazev().equals(nazev)) {
+                return predmet;
+            }
+        }
+        return null;
+    }
+
 
 }

@@ -11,25 +11,23 @@ public class Prozkoumej extends Command {
     @Override
     public String execute() {
         Mistnost mistnost = hrac.getAktualniMistnost();
-        System.out.println("Prohledavani mistnosti..." + mistnost.getNazev());
         Segra segra = svet.najdiSegru();
+        System.out.println("Prohledavani mistnosti..." + mistnost.getNazev());
         if (mistnost.obsahujePredmet()) {
             Predmet predmet = mistnost.getPredmet().values().iterator().next();
+            hrac.getAktualniMistnost().setProhledano(true);
             return "Nalezen novy predmet -> " + predmet.toString();
         }
-        switch ((mistnost.getNazev())){
-            case "obyvak":
+        return switch ((mistnost.getNazev())) {
+            case "obyvak" -> {
                 mistnost.getPostava().setStav("podezreni");
-                return mistnost.getPostava().komunikace(mistnost.getPostava().getStav());
-            case "tajna":
-                return segra.komunikace("odhaleni");
-            case "knihovna":
-                return segra.komunikace("heslo");
-            case "sklep":
-                return mistnost.getPostava().komunikace("vysvetleni");
-            default:
-                return "Zadny predmet nebyl nelezen";
-        }
+                yield mistnost.getPostava().komunikace(mistnost.getPostava().getStav());
+            }
+            case "tajna" -> segra.komunikace("odhaleni");
+            case "knihovna" -> segra.komunikace("heslo");
+            case "sklep" -> mistnost.getPostava().komunikace("vysvetleni");
+            default -> "Zadny predmet nebyl nelezen";
+        };
     }
 
 }

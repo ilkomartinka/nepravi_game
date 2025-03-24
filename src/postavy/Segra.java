@@ -36,5 +36,9 @@ public class Segra extends Postava {
     public void setPoloha(Mistnost poloha) {
         this.poloha = poloha;
     }
+
+    public Mistnost getPoloha() {
+        return poloha;
+    }
 }
 
