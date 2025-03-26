@@ -8,7 +8,9 @@ import postavy.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+/**
+ * Testovací třída pro Svet.
+ */
 class SvetTest {
 
     private Svet svet;

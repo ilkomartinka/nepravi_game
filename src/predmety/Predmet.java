@@ -1,6 +1,5 @@
 package predmety;
 
-import hra.Hrac;
 /**
  * Abstraktní třída představující předmět, který může hráč použít.
  */

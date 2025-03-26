@@ -21,13 +21,7 @@ public abstract class Postava {
         this.stav = jmeno + "-" + popis;
     }
 
-    public String getJmeno() {
-        return jmeno;
-    }
 
-    public String getPopis() {
-        return popis;
-    }
     /**
      * Přidá možnou komunikaci pro určitý stav.
      * @param stav Stav postavy.

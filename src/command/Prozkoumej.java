@@ -4,10 +4,20 @@ import postavy.Segra;
 import predmety.Predmet;
 import svet.Mistnost;
 
+/**
+ * Třída {@code Prozkoumej} představuje příkaz, který umožňuje hráči prozkoumat aktuální místnost.
+ */
 public class Prozkoumej extends Command {
     public Prozkoumej() {
     }
 
+    /**
+     * Provádí prozkoumání aktuální místnosti.
+     * Pokud je v místnosti předmět, hráč ho nalezne a přidá do inventáře.
+     * V závislosti na názvu místnosti může být také vyvolána speciální komunikace s postavami.
+     *
+     * @return Textový výstup informující o výsledku prozkoumání místnosti.
+     */
     @Override
     public String execute() {
         Mistnost mistnost = hrac.getAktualniMistnost();
@@ -29,6 +39,4 @@ public class Prozkoumej extends Command {
             default -> "Zadny predmet nebyl nelezen";
         };
     }
-
 }
-

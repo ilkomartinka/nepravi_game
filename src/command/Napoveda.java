@@ -1,5 +1,7 @@
 package command;
-
+/**
+ * Třída {@code Napoveda} představuje příkaz, který poskytuje hráči nápovědy během hry.
+ */
 public class Napoveda extends Command {
     private int index = 0;
     private final String[] napovedy = {
@@ -12,7 +14,11 @@ public class Napoveda extends Command {
             "7. Zámek může jít obejít i jinak než klíčem… co třeba kód?",
             "8. Když se nemůžeš dostat dál, vrať se zpátky. Možná ti něco uniklo."
     };
-
+    /**
+     * Každá nápověda  je vypsána postupně, jak je hráč požaduje.
+     * Jakmile jsou všechny nápovědy zobrazeny, vrátí zprávu.
+     * @return Nápovědu pro hráče, nebo zprávu, že nejsou k dispozici žádné další nápovědy.
+     */
     @Override
     public String execute() {
         if (index < napovedy.length) {
