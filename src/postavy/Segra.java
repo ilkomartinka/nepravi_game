@@ -1,10 +1,14 @@
 package postavy;
 
 import svet.Mistnost;
-
+/**
+ * Třída představující sestru hlavního hrdiny.
+ */
 public class Segra extends Postava {
     private Mistnost poloha;
-
+    /**
+     * Konstruktor pro vytvoření postavy sestry.
+     */
     public Segra() {
         super("Megan", "Tvoje sestra. Chodí všude za tebou, jako tvůj stín... akorát s větší pusou.");
         pridatKomunikaci("uvod", "Megan: těším se, až se seznámíme. Pokud děda vypadá jako na fotkách, asi mu budu muset půjčit hřeben");
@@ -24,7 +28,9 @@ public class Segra extends Postava {
                 "                     ");
 
     }
-
+    /**
+     * Nastaví nový stav postavy podle situace.
+     */
     public void nastavNovyStav() {
         if (this.getStav().equals("uvod")) {
             this.setStav("podezreni");
@@ -32,11 +38,17 @@ public class Segra extends Postava {
             this.setStav("krize");
         }
     }
-
+    /**
+     * Nastaví polohu sestry v určité místnosti.
+     * @param poloha Nová poloha postavy.
+     */
     public void setPoloha(Mistnost poloha) {
         this.poloha = poloha;
     }
-
+    /**
+     * Získá aktuální polohu sestry.
+     * @return Poloha postavy.
+     */
     public Mistnost getPoloha() {
         return poloha;
     }

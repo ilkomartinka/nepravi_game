@@ -1,4 +1,7 @@
 package predmety;
+/**
+ * Předmět reprezentující deník s důležitými informacemi.
+ */
 public class Denik extends Predmet {
     public Denik() {
         super("denik");

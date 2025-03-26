@@ -1,5 +1,7 @@
 package predmety;
-
+/**
+ * Předmět reprezentující klíč.
+ */
 public class Klic extends Predmet {
 
     public Klic() {

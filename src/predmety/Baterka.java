@@ -1,4 +1,7 @@
 package predmety;
+/**
+ * Předmět reprezentující baterku.
+ */
 public class Baterka extends Predmet {
 
     public Baterka() {

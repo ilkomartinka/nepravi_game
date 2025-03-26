@@ -1,5 +1,7 @@
 package predmety;
-
+/**
+ * Předmět reprezentující SIM kartu.
+ */
 public class SIMkarta extends Predmet {
     public SIMkarta() {
         super("SIMkarta");

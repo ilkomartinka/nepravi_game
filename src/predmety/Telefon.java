@@ -1,5 +1,7 @@
 package predmety;
-
+/**
+ * Předmět reprezentující telefon.
+ */
 public class Telefon extends Predmet {
 
     public Telefon() {
