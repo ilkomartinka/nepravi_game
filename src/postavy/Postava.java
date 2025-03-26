@@ -47,6 +47,10 @@ public abstract class Postava {
         return stav;
     }
 
+    public String getJmeno() {
+        return jmeno;
+    }
+
     @Override
     public String toString() {
         return jmeno + ": " + popis;
