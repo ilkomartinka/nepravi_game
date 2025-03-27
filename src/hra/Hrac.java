@@ -49,9 +49,8 @@ public class Hrac {
         for (Predmet p : inventar) {
             if (p.getNazev().equals(nazev)) {
                 inventar.remove(p);
-                return;
             }else{
-                throw new IllegalArgumentException("Předmět " + nazev + " nebyl nalezen v inventáři.");
+                System.out.println("Předmět " + nazev + " nebyl nalezen v inventáři.");
             }
         }
     }

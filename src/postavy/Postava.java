@@ -36,7 +36,7 @@ public abstract class Postava {
      * @return Text komunikace.
      */
     public String komunikace(String stav) {
-        return komunikaceMap.getOrDefault(stav, "...");
+        return komunikaceMap.getOrDefault(stav, "V této místnosti není žádná postava.");
     }
 
     public void setStav(String stav) {

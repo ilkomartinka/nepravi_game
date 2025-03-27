@@ -5,6 +5,7 @@ import postavy.Postava;
 import postavy.PraviPrarodice;
 import postavy.Segra;
 import svet.Mistnost;
+
 /**
  * Třída {@code Mluv} umožňuje komunikaci s postavami v místnosti.
  * Pokud je v aktuální místnosti postava, hráč může s ní komunikovat a získat její repliku.
@@ -19,7 +20,7 @@ public class Mluv extends Command {
      */
     @Override
     public String execute() {
-        try{
+        try {
             Mistnost mistnost = hrac.getAktualniMistnost();
             if (mistnost != null) {
                 Postava postava = mistnost.getPostava();
@@ -29,13 +30,13 @@ public class Mluv extends Command {
                     String odpoved = segra.komunikace(segra.getStav());
                     segra.nastavNovyStav();
                     return odpoved;
-                } else if(hrac.getAktualniMistnost().getNazev().equals("sklep")){
+                } else if (hrac.getAktualniMistnost().getNazev().equals("sklep")) {
                     PraviPrarodice praviPrarodice = (PraviPrarodice) postava;
                     System.out.println(praviPrarodice.komunikace("uvod"));
-                }else {
+                } /*else if(postava == null){
                     throw new IllegalStateException("V této místnosti není žádná postava.");
-                }
-            }   throw new IllegalStateException("Aktuální místnost není nastavena.");
+                }*/
+            }throw new IllegalStateException("Aktuální místnost není nastavena.");
         } catch (ClassCastException e) {
             return "Chyba: Nesprávný typ postavy v místnosti.";
         } catch (Exception e) {

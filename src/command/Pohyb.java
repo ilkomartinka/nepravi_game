@@ -78,6 +78,8 @@ public class Pohyb extends Command {
                     hrac.setAktualniMistnost(zvolenaMistnost);
                     svet.presunSegru(zvolenaMistnost);
                 }
+            }else{
+                return "Neplatný vstup";
             }
             return "Ted se nachazis v -> " + hrac.getAktualniMistnost();
         } catch (IllegalArgumentException e) {
