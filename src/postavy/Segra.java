@@ -14,7 +14,7 @@ public class Segra extends Postava {
         pridatKomunikaci("uvod", "Megan: těším se, až se seznámíme. Pokud děda vypadá jako na fotkách, asi mu budu muset půjčit hřeben");
         pridatKomunikaci("podezreni", "Megan: Něco tady nehraje... Všimnul sis jak se chovaji?");
         pridatKomunikaci("krize", "Megan: Musíme odsud vypadnout, jinak jsme v háji!");
-        pridatKomunikaci("sklep", "Megan: KOUKEJ TADY NEKDO JE");
+        pridatKomunikaci("sklep", "Megan: TADY NEKDO JE, ale nic nevidim potřebujeme baterku");
         pridatKomunikaci("odhaleni", """
                 Megan: Koukej našla jsem na stole staré noviny...\
                 

@@ -13,21 +13,30 @@ public class Prozkoumej extends Command {
 
     /**
      * Provádí prozkoumání aktuální místnosti.
-     * Pokud je v místnosti předmět, hráč ho nalezne a přidá do inventáře.
+     * Pokud je v místnosti předmět, hráč ho nalezne.
      * V závislosti na názvu místnosti může být také vyvolána speciální komunikace s postavami.
      *
-     * @return Textový výstup informující o výsledku prozkoumání místnosti.
+     * @return Zpráva o výsledku prohledání místnosti nebo interakci s postavami.
      */
     @Override
     public String execute() {
         Mistnost mistnost = hrac.getAktualniMistnost();
         Segra segra = svet.najdiSegru();
+        // Pokud se hráč nachází ve sklepě a nemá baterku, zobrazí se varování a prohledání nebude možné.
+        if (mistnost.getNazev().equals("sklep") && !hrac.maPredmet("baterka"))
+            return "Ve sklepě je tma, nejdřív musíš rozsvítit!";
+        // Pokud se hráč nachází ve sklepě a má baterku, baterka se použije.
+        else if(mistnost.getNazev().equals("sklep") && hrac.maPredmet("baterka")){
+            System.out.println(hrac.getPredmet("baterka").pouziti());
+        }
+
         System.out.println("Prohledavani mistnosti..." + mistnost.getNazev());
         if (mistnost.obsahujePredmet()) {
             Predmet predmet = mistnost.getPredmet().values().iterator().next();
             hrac.getAktualniMistnost().setProhledano(true);
             return "Nalezen novy predmet -> " + predmet.toString();
         }
+        // Interakce s postavami podle aktuální místnosti
         return switch ((mistnost.getNazev())) {
             case "obyvak" -> {
                 mistnost.getPostava().setStav("podezreni");

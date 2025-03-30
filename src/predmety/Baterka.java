@@ -10,6 +10,6 @@ public class Baterka extends Predmet {
 
     @Override
     public String pouziti() {
-      return "Zapnul jsi baterku." ;
+      return "Zapnul jsi baterku. Můžeš prohledat sklep" ;
     }
 }

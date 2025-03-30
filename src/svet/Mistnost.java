@@ -14,8 +14,8 @@ import java.util.Objects;
  */
 public class Mistnost {
     private String nazev;
-    private HashMap<String, Predmet> predmety; //<nazev predmetu, predmet>
-    private HashSet<String> sousedniMistnosti;
+    private final HashMap<String, Predmet> predmety; //<nazev predmetu, predmet>
+    private final HashSet<String> sousedniMistnosti;
     private boolean zamceno;
     private String pomocnyPredmet; //k otevreni mistnosti
     private final ArrayList<Postava> postavy;
@@ -156,7 +156,7 @@ public class Mistnost {
      * @return Postava v místnosti nebo null.
      */
     public Postava getPostava() {
-        return postavy.isEmpty() ? null : postavy.get(0);
+        return postavy.isEmpty() ? null : postavy.getFirst();
     }
     /**
      * Nastavuje, zda je místnost zamčená.
@@ -179,5 +179,4 @@ public class Mistnost {
     public void setProhledano(boolean prohledano) {
         this.prohledano = prohledano;
     }
-
 }

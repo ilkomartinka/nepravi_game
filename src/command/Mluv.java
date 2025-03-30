@@ -33,9 +33,9 @@ public class Mluv extends Command {
                 } else if (hrac.getAktualniMistnost().getNazev().equals("sklep")) {
                     PraviPrarodice praviPrarodice = (PraviPrarodice) postava;
                     System.out.println(praviPrarodice.komunikace("uvod"));
-                } /*else if(postava == null){
+                }else if(postava == null){
                     throw new IllegalStateException("V této místnosti není žádná postava.");
-                }*/
+                }
             }throw new IllegalStateException("Aktuální místnost není nastavena.");
         } catch (ClassCastException e) {
             return "Chyba: Nesprávný typ postavy v místnosti.";

@@ -21,93 +21,91 @@ public class Pouzij extends Command {
      * @return zprávu o úspěchu nebo chybě použití předmětu.
      */
     @Override
-    public String execute() { //vymyslet lepsi reseni
-        if (!hrac.getInventar().isEmpty()) {
-            System.out.println(hrac.vypisInventar());
-            System.out.print("Ktery predmet z inventare chces pouzit -> ");
-            String predmet = sc.next();
-            if (hrac.maPredmet(predmet)) {
-                Predmet p = hrac.getPredmet(predmet);
-                if (moznostPouziti(p)) {
-                    System.out.println(p.pouziti());
-                    hrac.odebratPredmet(p);
+    public String execute() {
+        try {
+            if (!hrac.getInventar().isEmpty()) {
+                System.out.println(hrac.vypisInventar());
+                System.out.print("Ktery předmět z inventaře chceš použit (zpet) -> ");
+                String odpoved = sc.nextLine().trim();
+                if (odpoved.equals("zpet")) {
+                    return "Nepoužil jsi žadný předmět";
+                }
+                if (hrac.maPredmet(odpoved)) {
+                    Predmet p = hrac.getPredmet(odpoved);
+                    if (moznostPouziti(p)) {
+                        if(!p.getNazev().equals("simkarta")){
+                            hrac.odebratPredmet(p);
+                        }
+                        System.out.println(p.pouziti());
+                    }
+                } else {
+                    throw new IllegalArgumentException("Tento předmět neexistuje v tvém inventáři.");
                 }
             } else {
-                return "Tento předmět nelze použít.";
+                return "Tvůj inventář je prázdný.";
             }
-        } else {
-            return "Tvůj inventář je prázdný.";
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            return e.getMessage();
         }
-        return "";
+        return "Pokračuj dál";
     }
 
+    /**
+     * Zkontroluje, zda je možné použít daný předmět v aktuální situaci.
+     *
+     * @param p Předmět, který se pokoušíme použít.
+     * @return true, pokud je předmět možné použít; jinak vyhodí výjimku.
+     * @throws IllegalStateException Pokud není možné použít předmět v dané situaci.
+     */
     private boolean moznostPouziti(Predmet p) {
-        boolean muzesPouzit = false;
         switch (p.getNazev()) {
             case "telefon":
-                if (!hrac.maPredmet("simkarta"))
-                    System.out.println("Nemůžeš nikomu zavolat, potřebuješ SIM kartu.");
+                if (!hrac.maPredmet("simkarta")){
+                    throw new IllegalStateException("Nemůžeš nikomu zavolat, potřebuješ SIM kartu.");
+                }else{
+                    konec();
+                }
                 break;
             case "simkarta":
                 if (!hrac.maPredmet("telefon"))
-                    System.out.println("K použití SIM karty potřebuješ mobil.");
+                    throw new IllegalStateException("K použití SIM karty potřebuješ mobil.");
                 break;
             case "baterka":
-                if (!hrac.getAktualniMistnost().getNazev().equals("sklep"))
-                    System.out.println("Doporučuji použít ve sklepě, je tam příšerná tma.");
+                if (!hrac.getAktualniMistnost().getNazev().equals("sklep")) {
+                    throw new IllegalStateException("Doporučuji použít ve sklepě, je tam příšerná tma.");
+                }
                 break;
             case "klic":
                 if (!hrac.getAktualniMistnost().getNazev().equals("loznice")) {
-                    System.out.println("Doporučuji použít k otevření zamčené místnosti");
+                    throw new IllegalStateException("Doporučuji použít k otevření zamčené místnosti");
                 } else {
-                    muzesPouzit = true;
                     Mistnost tajnaMistnost = svet.getMapa().get("tajna");
                     if (tajnaMistnost.isZamceno()) {
                         tajnaMistnost.setZamceno(false);
                     }
                 }
                 break;
-            case "denik": muzesPouzit = true;
+            case "denik":
+                return true;
+            default:
+                throw new IllegalArgumentException("Tento předmět nelze použít.");
         }
-        return muzesPouzit;
+        return true;
     }
-}   /* switch (predmet) {
-                    case "simkarta":
-                        if (!hrac.maPredmet("telefon")) {
-                            return "K použití SIM karty potřebuješ mobil.";
-                        } else {
-                            System.out.println(p.pouziti());
-                            hrac.odebratPredmet(p.getNazev());
-                        }
-                        break;
-                    case "telefon":
-                        if (!hrac.maPredmet("SIMkarta")) {
-                            return "Nemůžeš nikomu zavolat, potřebuješ SIM kartu.";
-                        } else {
-                            System.out.println(p.pouziti());
-                            System.exit(0);
-                        }
-                        break;
-                    case "baterka":
-                        if (!hrac.getAktualniMistnost().getNazev().equals("sklep")) {
-                            return "Doporučuji použít ve sklepě, je tam příšerná tma.";
-                        } else {
-                            System.out.println(p.pouziti());
-                        }
-                        break;
-                    case "klic":
-                        if (hrac.getAktualniMistnost().getNazev().equals("loznice")) {
-                            Mistnost tajnaMistnost = svet.getMapa().get("tajna");
-                            if (tajnaMistnost.isZamceno()) {
-                                tajnaMistnost.setZamceno(false);
-                                System.out.println(p.pouziti());
-                                hrac.odebratPredmet(p.getNazev());
-                            }
-                        } else {
-                            return "";
-                        }
-                        break;
-                    default:
-                        hrac.odebratPredmet(p.getNazev());
-                        System.out.println(p.pouziti());
-                }*/
+
+    /**
+     * Konec hry, kdy hráč vyhrál.
+     * Zobrazí vítězný text.
+     */
+    private void konec(){
+        System.out.println("""
+                Hlas na druhé straně odpovídá:
+                
+                „Pomoc přijde co nejdříve, držte se!“
+                
+                Cítíš, jak z tebe padá veškeré napětí. Na chvíli se zastavíš a přemýšlíš, jak těžké to všechno bylo. Ale teď je to u konce.\
+                
+                Gratulujeme, právě jsi vyhrál(a)!""");
+        System.exit(0);
+    }
+}

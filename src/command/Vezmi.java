@@ -30,6 +30,6 @@ public class Vezmi extends Command {
         } else {
             return "V této místnosti není žádný předmět.";
         }
-        return "Nejdriv musis mistnost prohledat";
+        return "Nejdřiv musiš mistnost prohledat";
     }
 }

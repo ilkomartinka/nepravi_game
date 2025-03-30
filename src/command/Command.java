@@ -14,13 +14,13 @@ public abstract class Command {
     /**
      * Nastaví objekty hráč a svět pro tento příkaz.
      *
-     * @param hrac
-     * @param svet
+     * @param hrac Hráč, který provádí příkaz.
+     * @param svet Herní svět, ve kterém se příkaz vykonává.
      */
    public void set(Hrac hrac, Svet svet) {
        this.hrac = hrac;
        this.svet = svet;
-   };
+   }
     /**
      * Abstraktní metoda, která vykoná příkaz.
      * Definovat konkrétní chování příkazu.

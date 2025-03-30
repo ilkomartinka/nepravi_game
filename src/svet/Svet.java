@@ -85,7 +85,6 @@ public class Svet {
 
     /**
      * Přidá postavy do specifických místností.
-     * @throws NullPointerException pokud některá místnost neexistuje v mapě.
      */
     public void pridaniPostav() throws NullPointerException{
             mapa.get("sklep").pridatPostavu(new PraviPrarodice());

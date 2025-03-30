@@ -96,22 +96,5 @@ public class Hra {
             }
         }
         System.out.println("Ted stojiš v mistnosti: " + hrac.getAktualniMistnost().getNazev() + ". Atˇ se daří!");
-
-    }
-
-    /**
-     * Konec hry, kdy hráč vyhrál.
-     * Zobrazí vítězný text.
-     */
-    private void konec(){
-        System.out.println("""
-                Hlas na druhé straně odpovídá:
-                
-                „Pomoc přijde co nejdříve, držte se!“
-                
-                Cítíš, jak z tebe padá veškeré napětí. Na chvíli se zastavíš a přemýšlíš, jak těžké to všechno bylo. Ale teď je to u konce.\
-                
-                Gratulujeme, právě jsi vyhrál(a)!""");
     }
 }
-

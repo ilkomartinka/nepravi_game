@@ -39,76 +39,93 @@ public class Hrac {
 
     }
 
-
     /**
-     * Odebere předmět z inventáře podle názvu.
+     * Odebere předmět z inventáře.
      *
      * @param p předmět, který má být odebrán.
      * @throws IllegalArgumentException Pokud není předmět v inventáři.
      */
     public void odebratPredmet(Predmet p) {
         if (p != null) {
-            inventar.remove(p);
+            if (inventar.contains(p)) {
+                inventar.remove(p);
+            } else {
+                System.out.println("Předmět " + p + " nebyl nalezen v inventáři.");
+            }
         } else {
-            System.out.println("Předmět " + p + " nebyl nalezen v inventáři.");
+            throw new IllegalArgumentException("Nelze odebrat null předmět.");
         }
     }
 
 
-
-public Mistnost getAktualniMistnost() {
-    return aktualniMistnost;
-}
-
-public void setAktualniMistnost(Mistnost aktualniMistnost) {
-    this.aktualniMistnost = aktualniMistnost;
-}
-
-/**
- * Vrací seznam předmětů v inventáři ve formě řetězce.
- *
- * @return Seznam předmětů v inventáři jako řetězec.
- */
-public String vypisInventar() {
-    StringBuilder sb = new StringBuilder("Inventář: ");
-    for (Predmet p : inventar) {
-        sb.append("-").append(p.getNazev()).append(" ");
+    /**
+     * Vrátí aktuální místnost, ve které se hráč nachází.
+     *
+     * @return aktuální místnost hráče.
+     */
+    public Mistnost getAktualniMistnost() {
+        return aktualniMistnost;
     }
-    return sb.toString().trim();
-}
 
-/**
- * Zkontroluje, zda hráč předmět se zadaným názvem.
- *
- * @param p Název předmětu, který hledáme.
- * @return true, pokud hráč má tento předmět v inventáři, jinak false.
- */
-public boolean maPredmet(String p) {
-    for (Predmet predmet : inventar) {
-        if (predmet.getNazev().equals(p)) {
-            return true;
+    /**
+     * Nastaví aktuální místnost, ve které se hráč nachází.
+     *
+     * @param aktualniMistnost nová aktuální místnost hráče.
+     */
+    public void setAktualniMistnost(Mistnost aktualniMistnost) {
+        this.aktualniMistnost = aktualniMistnost;
+    }
+
+    /**
+     * Vrací seznam předmětů v inventáři ve formě řetězce.
+     *
+     * @return Seznam předmětů v inventáři jako řetězec.
+     */
+    public String vypisInventar() {
+        StringBuilder sb = new StringBuilder("Inventář: ");
+        for (Predmet p : inventar) {
+            sb.append("-").append(p.getNazev()).append(" ");
         }
+        return sb.toString().trim();
     }
-    return false;
-}
 
-/**
- * Vrací předmět podle názvu, pokud existuje v inventáři.
- *
- * @param nazev Název předmětu.
- * @return Předmět, pokud existuje, jinak null.
- * @throws IllegalArgumentException Pokud předmět není nalezen v inventáři.
- */
-public Predmet getPredmet(String nazev) {
-    for (Predmet predmet : inventar) {
-        if (predmet.getNazev().equals(nazev)) {
-            return predmet;
+    /**
+     * Zkontroluje, zda hráč předmět se zadaným názvem.
+     *
+     * @param p Název předmětu, který hledáme.
+     * @return true, pokud hráč má tento předmět v inventáři, jinak false.
+     */
+    public boolean maPredmet(String p) {
+        for (Predmet predmet : inventar) {
+            if (predmet.getNazev().equals(p)) {
+                return true;
+            }
         }
+        return false;
     }
-    throw new IllegalArgumentException("Předmět s názvem '" + nazev + "' nebyl nalezen v inventáři.");
-}
 
-public ArrayList<Predmet> getInventar() {
-    return inventar;
-}
+    /**
+     * Vrací předmět podle názvu, pokud existuje v inventáři.
+     *
+     * @param nazev Název předmětu.
+     * @return Předmět, pokud existuje, jinak null.
+     * @throws IllegalArgumentException Pokud předmět není nalezen v inventáři.
+     */
+    public Predmet getPredmet(String nazev) {
+        for (Predmet predmet : inventar) {
+            if (predmet.getNazev().equals(nazev)) {
+                return predmet;
+            }
+        }
+        throw new IllegalArgumentException("Předmět s názvem '" + nazev + "' nebyl nalezen v inventáři.");
+    }
+
+    /**
+     * Vrátí seznam předmětů v inventáři hráče.
+     *
+     * @return seznam předmětů v inventáři.
+     */
+    public ArrayList<Predmet> getInventar() {
+        return inventar;
+    }
 }

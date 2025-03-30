@@ -8,7 +8,7 @@ public abstract class Postava {
     protected String jmeno;
     protected String popis;
     protected HashMap<String, String> komunikaceMap;   //<stav,text>
-    protected String stav; //napad: stav jJako enum
+    protected String stav;
     /**
      * Konstruktor pro vytvoření postavy.
      * @param jmeno Jméno postavy.
@@ -20,7 +20,6 @@ public abstract class Postava {
         this.komunikaceMap = new HashMap<>();
         this.stav = jmeno + "-" + popis;
     }
-
 
     /**
      * Přidá možnou komunikaci pro určitý stav.
@@ -55,6 +54,4 @@ public abstract class Postava {
     public String toString() {
         return jmeno + ": " + popis;
     }
-
-
 }
