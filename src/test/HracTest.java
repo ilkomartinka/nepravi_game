@@ -33,13 +33,13 @@ public class HracTest {
         void testNepridaniDuplicitnihoPredmetu() {
             hrac.doplneniInventare(predmet1);
             hrac.doplneniInventare(predmet1);
-            assertEquals(1, hrac.getInventar().split("-").length - 1);
+            assertEquals(1, hrac.vypisInventar().split("-").length - 1);
         }
 
         @Test
         void testOdebraniPredmetu() {
             hrac.doplneniInventare(predmet1);
-            hrac.odebratPredmet("klic");
+            hrac.odebratPredmet(predmet1);
             assertFalse(hrac.maPredmet("klic"));
         }
 

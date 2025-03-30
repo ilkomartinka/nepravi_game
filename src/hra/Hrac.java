@@ -39,68 +39,76 @@ public class Hrac {
 
     }
 
+
     /**
      * Odebere předmět z inventáře podle názvu.
      *
-     * @param nazev Název předmětu, který má být odebrán.
+     * @param p předmět, který má být odebrán.
      * @throws IllegalArgumentException Pokud není předmět v inventáři.
      */
-    public void odebratPredmet(String nazev) {
-        for (Predmet p : inventar) {
-            if (p.getNazev().equals(nazev)) {
-                inventar.remove(p);
-            }else{
-                System.out.println("Předmět " + nazev + " nebyl nalezen v inventáři.");
-            }
+    public void odebratPredmet(Predmet p) {
+        if (p != null) {
+            inventar.remove(p);
+        } else {
+            System.out.println("Předmět " + p + " nebyl nalezen v inventáři.");
         }
     }
 
 
-    public Mistnost getAktualniMistnost() {
-        return aktualniMistnost;
-    }
 
-    public void setAktualniMistnost(Mistnost aktualniMistnost) {
-        this.aktualniMistnost = aktualniMistnost;
+public Mistnost getAktualniMistnost() {
+    return aktualniMistnost;
+}
+
+public void setAktualniMistnost(Mistnost aktualniMistnost) {
+    this.aktualniMistnost = aktualniMistnost;
+}
+
+/**
+ * Vrací seznam předmětů v inventáři ve formě řetězce.
+ *
+ * @return Seznam předmětů v inventáři jako řetězec.
+ */
+public String vypisInventar() {
+    StringBuilder sb = new StringBuilder("Inventář: ");
+    for (Predmet p : inventar) {
+        sb.append("-").append(p.getNazev()).append(" ");
     }
-    /**
-     * Vrací seznam předmětů v inventáři ve formě řetězce.
-     * @return Seznam předmětů v inventáři jako řetězec.
-     */
-    public String getInventar() {
-        StringBuilder sb = new StringBuilder("Inventář: ");
-        for (Predmet p : inventar) {
-            sb.append("-").append(p.getNazev()).append(" ");
+    return sb.toString().trim();
+}
+
+/**
+ * Zkontroluje, zda hráč předmět se zadaným názvem.
+ *
+ * @param p Název předmětu, který hledáme.
+ * @return true, pokud hráč má tento předmět v inventáři, jinak false.
+ */
+public boolean maPredmet(String p) {
+    for (Predmet predmet : inventar) {
+        if (predmet.getNazev().equals(p)) {
+            return true;
         }
-        return sb.toString().trim();
     }
-    /**
-     * Zkontroluje, zda hráč předmět se zadaným názvem.
-     *
-     * @param p Název předmětu, který hledáme.
-     * @return true, pokud hráč má tento předmět v inventáři, jinak false.
-     */
-    public boolean maPredmet(String p) {
-        for (Predmet predmet : inventar) {
-            if (predmet.getNazev().equals(p)) {
-                return true;
-            }
+    return false;
+}
+
+/**
+ * Vrací předmět podle názvu, pokud existuje v inventáři.
+ *
+ * @param nazev Název předmětu.
+ * @return Předmět, pokud existuje, jinak null.
+ * @throws IllegalArgumentException Pokud předmět není nalezen v inventáři.
+ */
+public Predmet getPredmet(String nazev) {
+    for (Predmet predmet : inventar) {
+        if (predmet.getNazev().equals(nazev)) {
+            return predmet;
         }
-        return false;
     }
-    /**
-     * Vrací předmět podle názvu, pokud existuje v inventáři.
-     *
-     * @param nazev Název předmětu.
-     * @return Předmět, pokud existuje, jinak null.
-     * @throws IllegalArgumentException Pokud předmět není nalezen v inventáři.
-     */
-    public Predmet getPredmet(String nazev) {
-        for (Predmet predmet : inventar) {
-            if (predmet.getNazev().equals(nazev)) {
-                return predmet;
-            }
-        }
-        throw new IllegalArgumentException("Předmět s názvem '" + nazev + "' nebyl nalezen v inventáři.");
-    }
+    throw new IllegalArgumentException("Předmět s názvem '" + nazev + "' nebyl nalezen v inventáři.");
+}
+
+public ArrayList<Predmet> getInventar() {
+    return inventar;
+}
 }

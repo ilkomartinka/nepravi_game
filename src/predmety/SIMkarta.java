@@ -4,7 +4,7 @@ package predmety;
  */
 public class SIMkarta extends Predmet {
     public SIMkarta() {
-        super("SIMkarta");
+        super("simkarta");
     }
 
     @Override
